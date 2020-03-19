@@ -3,7 +3,7 @@ require 'csv'
 class Employee
   
   def read_csv_data(file)
-    CSV.read('test.csv', headers: true)
+    CSV.read(file, headers: true)
   end
 
   def extract_details(data)
