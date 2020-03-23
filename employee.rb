@@ -1,9 +1,20 @@
 require 'csv'
 
 class Employee
+
+  def create_new_csv
+    CSV.open('test.csv','wb') do |csv|
+      csv << ['Name', 'EmpID', 'Designation']
+      csv << ['Jack', '15', 'Developer']
+      csv << ['Mary', '13', 'Designer']
+      csv << ['John', '12', 'Developer']
+      csv << ['Jane', '17', 'Designer']
+      csv << ['Johny', '19', 'Tester']
+  end
+  end
   
   def read_csv_data(file)
-    CSV.read(file, headers: true)
+    CSV.read('test.csv', headers: true)
   end
 
   def extract_details(data)
@@ -21,8 +32,8 @@ class Employee
     end
   end
 
-  def save_details(details)
-    File.open("newfile.csv", "w") do |file|
+  def export_details(details)
+    File.open("new_format.csv", "w") do |file|
       details.each do |designation, value|
         file.puts "#{designation}#{"s" if details[designation].length > 1}"
         value.each { |detail| file.puts "#{detail[0]} (EmpId: #{detail[1]})" }
@@ -36,8 +47,8 @@ class Employee
     details = extract_details(data)
     details = sort_details(details)
     grouped_details = group_details(details)
-    save_details(grouped_details)
+    export_details(grouped_details)
   end
 end
 employee = Employee.new
-employee.get_details_from_csv("test.csv")
+employee.get_details_from_csv('test.csv')
