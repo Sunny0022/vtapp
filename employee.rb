@@ -1,20 +1,20 @@
-require 'csv'
-
 class Employee
 
   def create_new_csv
-    CSV.open('test.csv','wb') do |csv|
-      csv << ['Name', 'EmpID', 'Designation']
-      csv << ['Jack', '15', 'Developer']
-      csv << ['Mary', '13', 'Designer']
-      csv << ['John', '12', 'Developer']
-      csv << ['Jane', '17', 'Designer']
-      csv << ['Johny', '19', 'Tester']
+    file_to_save = CSV.open('test.csv','w+')
+      file_to_save.puts('Name', 'EmpID', 'Designation')
+      file_to_save.puts('Jack', '15', 'Developer')
+      file_to_save.puts('Mary', '13', 'Designer')
+      file_to_save.puts('John', '12', 'Developer')
+      file_to_save.puts('Jane', '17', 'Designer')
+      file_to_save.puts('Johny', '19', 'Tester')
+      file_to_save.close
   end
-  end
-  
+end
+
+class CSV
   def read_csv_data(file)
-    CSV.read('test.csv', headers: true)
+    CSV.read('file', headers: true)
   end
 
   def extract_details(data)
@@ -51,4 +51,6 @@ class Employee
   end
 end
 employee = Employee.new
-employee.get_details_from_csv('test.csv')
+new_input = employee.create_new_csv
+csv = CSV.new
+csv.get_details_from_csv(new_input)
