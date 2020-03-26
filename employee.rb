@@ -1,6 +1,5 @@
 require_relative('C:/Training/csv_new.rb')
 class Employee
-
   def create_new_csv
     file_to_save = CSV.open('test.csv','w+')
       file_to_save.puts('Name', 'EmpID', 'Designation')
@@ -12,8 +11,6 @@ class Employee
       file_to_save.close
   end
 end
-
 employee = Employee.new
 new_input = employee.create_new_csv
-csv = CSV.new
-csv.get_details_from_csv(new_input)
+employee.get_details_from_csv(new_input)
