@@ -6,7 +6,6 @@ class CSVReader
       @empId = row[1]
       @designation = row[2]
       Employee.new(@name, @empId, @designation)
-      #Employee.new(row[0], row[1], row[2])
     end
   end
 end
@@ -27,7 +26,7 @@ class Employee
     end
     body = data.sort_by! { |row| row[2] }
     grouped_details = body.group_by { |row| row[2] }
-    details = grouped_details.each do |key, value|  
+    details = grouped_details.each do |key, value|
       value.sort_by! { |row| row[1] }
     end
     File.open('employees.csv', 'w') do |file|
